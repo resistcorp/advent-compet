@@ -1,0 +1,7 @@
+{
+  "name": "advent-racers",
+  "version": "1.0.0",
+  "description": "boris&yann's competiton",
+  "main": "index.js",
+  "type": "module"
+}

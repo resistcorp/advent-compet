@@ -6,4 +6,3 @@ rejoins le leaderboard de Boris :
 <li>join le leaderboard 178725-7dd7b618
 </ul>
 🚧
-<a href="/">←retour</a>
