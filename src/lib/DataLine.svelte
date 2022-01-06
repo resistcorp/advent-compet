@@ -1,14 +1,16 @@
 <script>
 	import { getContext } from 'svelte';
+	import { writable } from 'svelte/store';
 	import { tweened  } from 'svelte/motion';
-	import { elasticOut } from 'svelte/easing';
-	export let runs, min, max, avg, fails, maxAll;
-	let SIZE = 100;
+	import { cubicInOut } from 'svelte/easing';
+	export let runs, min, max, avg, inputsFailed, maxAll;
+	export let day, user, langage, year, inputsSolved;
 	let win_size = tweened (0, {
-		duration: 1300,
-		easing : elasticOut
+		duration: 500,
+		easing : cubicInOut
 	});
-	getContext("stats").width.subscribe( v=> $win_size = v );
+	// getContext("stats").width.subscribe( v=> $win_size = v );
+	let SIZE;
 	$: SIZE = $win_size / getTextWidth("█") / 2;
 	function getClass(fails){
 		if(fails > 0)
@@ -16,11 +18,12 @@
 		return "me";
 	}
 	function rep(avg, maxAll, fails, size){
-		if(fails > 0)
-			return size;
+		// if(fails > 0)
+		// 	return 0;
 		let ret = Math.round((avg / maxAll) * size);
-		console.log("calc repeat", avg, maxAll, ret)
-		return ret;
+		if(ret>=0)
+			return ret;
+		return 0;
 	}
 	function getTextWidth(text) {
 		return 7;
@@ -28,6 +31,9 @@
 
 </script>
 <style>
+	div{
+		width: calc(100% - 50px);
+	}
 	.runs{
 		color : green;
 		font-weight: bold;
@@ -47,4 +53,6 @@
 	}
 
 </style>
-<span class={getClass(fails)}>[{"█".repeat(rep(avg, maxAll, fails, SIZE))}]</span><span class="not-me">{"░".repeat(SIZE-rep(avg, maxAll, fails, SIZE))}</span><br />
+<div bind:clientWidth={$win_size}>
+	<span class={getClass(inputsFailed)}>[{"█".repeat(rep(avg, maxAll, inputsFailed, SIZE))}]</span><span class="not-me">{"░".repeat(SIZE-rep(avg, maxAll, inputsFailed, SIZE))}</span><br />
+</div>

@@ -1,22 +1,20 @@
-const columns = ["user", "year", "day", "runs", "fails", "min", "avg", "max"];
+// const columns = ["user", "year", "day", "runs", "fails", "avg", "min", "max"];
+const columns = ["user", "year", "day", "langage", "runs", "inputsFailed", "inputsSolved", "min", "avg", "max"];
 const separator = ";";
 import {dev}from "$app/env";
 import fs from "fs/promises"
-import {Storage} from "@google-cloud/storage";
-const key = "AIzaSyCb89c4Tvt61Q6140a0vmI0yHe0bLV0b3E";
-const storage = new Storage();
-const bucket = storage.bucket("stats.advent.racers.resistcorp.org");
-async function data(fetch){
+// import {Storage} from "@google-cloud/storage";
+// const key = "AIzaSyCb89c4Tvt61Q6140a0vmI0yHe0bLV0b3E";
+// const storage = new Storage();
+// const bucket = storage.bucket("stats.advent.racers.resistcorp.org");
+async function data(){
 	//TODO:read actual data
 	try{
-		const file = bucket.file("results.csv");
-		let dr = dev ? await fs.readFile("static/results.csv") : await file.download();
-		const alldata = new TextDecoder().decode(dev ? dr : dr[0]);
+		const path = dev ? "./static/results.csv" : "./assets/results.csv";
 
-console.log(alldata)
-		let text = alldata;//await alldata.text();
-		let lines = text.split("\n");
-		let all = lines.map(line => line.split(separator)).filter(spl => spl?.length >= columns.length).map(spl=>{
+		let text = await fs.readFile(path, "utf8");
+		let lines = text.split(/\r?\n/);
+		let all = lines.slice(1).map(line => line.split(separator)).filter(spl => spl?.length >= columns.length).map(spl=>{
 			const obj = {};
 			for(let i in columns){
 				obj[columns[i]] = spl[i].trim();
@@ -34,7 +32,7 @@ console.log(alldata)
 			let d = "d-"+day;
 			let year_day = `${year}-${day}`;
 			if(! y[d]) y[d] = {};
-			y[d][user] = {runs, avg, min, max, fails};
+			y[d][user] = {...obj};
 			if(!days.has(year_day))
 				y.days.push(day);
 

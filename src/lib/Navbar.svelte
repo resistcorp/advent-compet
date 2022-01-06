@@ -11,7 +11,7 @@
 		let ret = [];
 		for(let name of route.slice(1)){
 			current += name + "/";
-			ret.push({name, current});
+			ret.push({name, path:current});
 		}
 		return ret;
 	}
@@ -19,6 +19,6 @@
 {#if refs?.length }
 	<a href="/">←retour</a> /
 	{#each refs as {name, path}}
-		<a href="{path}">{name}</a> /
+		<a rel="external" href="{path}">{name}</a> /
 	{/each}
 {/if}
