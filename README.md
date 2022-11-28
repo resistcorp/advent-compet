@@ -24,3 +24,15 @@ npm run build
 ```
 
 > You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+
+to configure syncthing we need to start the service from ssh, 
+
+```bash
+sudo systemctl start syncthing@[username}].service
+```
+
+then tunnel into it
+
+```bash
+ssh -L 9898:localhost:8384 user@server-ip
+```
