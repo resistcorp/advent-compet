@@ -32,7 +32,7 @@
 		return val;
 	}
 </script>
-<h1>La compet' de Yann et Boris sur <a href="https://adventofcode.com/">Advent Of Code</a></h1>
+<h1>La compet' de Santa sur <a href="https://adventofcode.com/">Advent Of Code</a></h1>
 
 <StatTable header="les dernières stats : {year}" dataThatYear={latestYear} {year} {users} open={daysToOpen} full={false}/>
 <a href="/stats">→ toutes stats</a><br>

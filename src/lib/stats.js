@@ -3,10 +3,6 @@ const columns = ["user", "year", "day", "langage", "runs", "inputsFailed", "inpu
 const separator = ";";
 import {dev}from "$app/env";
 import fs from "fs/promises"
-// import {Storage} from "@google-cloud/storage";
-// const key = "AIzaSyCb89c4Tvt61Q6140a0vmI0yHe0bLV0b3E";
-// const storage = new Storage();
-// const bucket = storage.bucket("stats.advent.racers.resistcorp.org");
 async function data(){
 	//TODO:read actual data
 	try{

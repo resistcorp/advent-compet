@@ -44,6 +44,7 @@
 	function langicon(user){
 		let lg = dataThatDay?.[user]?.langage;
 		switch(lg){
+			case "skPython2" :
 			case "skPython" :
 				return "python";
 			case "skJava" :
