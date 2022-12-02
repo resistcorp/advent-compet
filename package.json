@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "set GOOGLE_APPLICATION_CREDENTIALS=credentials/cred.json&&svelte-kit dev",
+    "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "set CLOUD=1&&svelte-kit preview",
