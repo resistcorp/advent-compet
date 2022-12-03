@@ -4,7 +4,7 @@ import fs from "fs/promises";
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: myadapter(),
+		adapter: adapter({out : "build"}),
 
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
@@ -15,17 +15,17 @@ const config = {
 	}
 };
 
-function myadapter(){
-	let node_adapter = adapter({out : "build"});
-	return {
-		name: '@boris/gcloud',
+// function myadapter(){
+// 	let node_adapter = adapter({out : "build"});
+// 	return {
+// 		name: 'simple node',
 
-		async adapt({ utils, config }) {
-			await node_adapter.adapt({ utils, config });
-			await fs.copyFile("app.yaml", "build/app.yaml");
-			await fs.copyFile("built-package.json", "build/package.json");
-		}
-	};
-}
+// 		async adapt({ utils, config }) {
+// 			await node_adapter.adapt({ utils, config });
+// 			await fs.copyFile("app.yaml", "build/app.yaml");
+// 			await fs.copyFile("built-package.json", "build/package.json");
+// 		}
+// 	};
+// }
 
 export default config;

@@ -1,13 +1,9 @@
 export const get = async () =>{
 	let syncthing = await getSyncthingHealth();
 	let santa = await getSantaHealth();
-	return {
-		status : 200,
-		body: {
-			syncthing,
-			santa
-		}
-	};
+	return new Response(
+  	JSON.stringify({syncthing, santa}),
+  	{status : 200});
 };
 
 import fs from "fs/promises";

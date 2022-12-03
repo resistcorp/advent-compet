@@ -1,18 +1,7 @@
 <svelte:head>
 	<title>Advent of Code -- racers</title>
 </svelte:head>
-<script context="module">
-	export async function load({ fetch }){
-		const req = await fetch("/data.json");
-		let stats = await req.json();
-		let {years, data, users} = stats.stats;
-		let year = years.sort().pop();
-		return {
-			props : {latestYear : data[year],
-							 year, users}
-		}
-	}
-</script>
+
 <script>
 	import StatTable from "$lib/StatTable.svelte"
 	export let latestYear;

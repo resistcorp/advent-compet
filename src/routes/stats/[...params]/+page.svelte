@@ -1,15 +1,12 @@
 <script>
+//FIXME use +page.server.js to load and split the data
 	async function load(){
 		const req = await fetch("/data.json");
 		let result = await req.json();
-		years = result.stats.years;
-		users = result.stats.users;
-		days = result.stats.days;
-		data = result.stats.data;
-		return null;
+		return result.stats;
 	}
 	import { page } from '$app/stores';
-	let loading = load()
+	let loading = load().then(onStats);
 	import StatTable from "$lib/StatTable.svelte"
 	export let years = [];
 	export let users;
@@ -47,6 +44,12 @@
 			case 1 : return year_ok || day_ok;
 			default : return year_ok && day_ok;
 		};
+	}
+	function onStart(stats){
+		years = stats.years;
+		users = stats.users;
+		days = stats.days;
+		data = stats.data;
 	}
 	function search(term){
 

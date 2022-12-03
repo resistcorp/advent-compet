@@ -6,10 +6,7 @@ export const get = () =>{
 		{ name : "Tristan"},
 	];
 //TODO : compile from results.csv
-	return {
-		status : 200,
-		body: {
-			users
-		}
-	};
+	return new Response(
+		JSON.stringify({users}),
+    {status : 200});
 };

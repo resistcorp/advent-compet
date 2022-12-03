@@ -1,7 +1,6 @@
 import {dev} from "$app/env";
 import fs from "fs/promises";
 
-
 export const get = async({params}) =>{
 	const path = dev ? "./static/results.csv" : "./assets/results.csv";
 
@@ -10,10 +9,6 @@ export const get = async({params}) =>{
 	let stamp = stats.mtimeMs;
 	handle.close()
 
-	return {
-		status : 200,
-		body: {
-			stamp
-		}
-	};
+	return new Response(JSON.stringify({stamp}),
+		{status : 200});
 };
